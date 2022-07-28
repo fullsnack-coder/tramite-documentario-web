@@ -20,8 +20,11 @@
         header("location: /tramite-documentario/index.php");
     } else {
         $idusuario = $r["idusuario"];
+        $tipousuario = $r["idtipousuario"];
         
         $_SESSION["usuario"] = $idusuario;
+        $_SESSION["tipo"] = $tipousuario;
+        //TODO: agregar la variable tipo de usuario
         $_SESSION["auth"] = 1;
         header("location: /tramite-documentario/principal.php");
     }

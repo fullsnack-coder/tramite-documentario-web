@@ -31,10 +31,10 @@
                         $sqlDatos = "INSERT INTO alumno(idusuario) VALUES (".$nuevoUsuario["idusuario"].")";
                     } else if ($tipousuario == 2) { // es egresado
                         $sqlDatos = "INSERT INTO egresado(idusuario) VALUES (".$nuevoUsuario["idusuario"].")";
-                    } else if ($tipousuario == 3) { // personal administrativo
-                        $sqlDatos = "INSERT INTO personal(idusuario) VALUES (".$nuevoUsuario["idusuario"].")";
-                    } else if ($tipousuario == 4) { // institucion
+                    } else if ($tipousuario == 3) { // institucion
                         $sqlDatos = "INSERT INTO institucion(idusuario) VALUES (".$nuevoUsuario["idusuario"].")";
+                    } else if ($tipousuario == 4) { // personal
+                        $sqlDatos = "INSERT INTO personal(idusuario) VALUES (".$nuevoUsuario["idusuario"].")";
                     }
                 }
 
