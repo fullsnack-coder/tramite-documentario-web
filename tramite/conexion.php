@@ -1,9 +1,8 @@
 <?php 
 
-
 $cn=mysql_connect("localhost","root","");
 
-mysql_select_db("reporte",$cn);
+mysql_select_db("tramite",$cn);
 
 
  ?>

@@ -1,4 +1,8 @@
+<?php 
+include('conexion.php')
 
+$queryAlu = "select* from alumnos"
+?>
 
 <!DOCTYPE html>
 <html lang="en">
