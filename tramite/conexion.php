@@ -1,8 +1,7 @@
 <?php 
 
-$cn=mysql_connect("localhost","root","");
-
-mysql_select_db("tramite",$cn);
+$cn = mysqli_connect("localhost","root","","tramite");
+//mysql_select_db("tramite",$cn);
 
 
  ?>
