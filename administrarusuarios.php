@@ -3,6 +3,9 @@
     include("utils/auth.php");
     include("utils/conexion.php");
 
+    if ($_SESSION["tipo"] != 5) {
+        header("location: principal.php");
+    }
 
 ?>
 
@@ -13,63 +16,65 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ADMINISTRA USUARIOS</title>
+    <?php
+        include("cabecera.php");
+    ?>
 </head>
 <body>
-    <table border="1" >
-        <tr>
-            <td>ID de Usuario</td>
-            <td>Nombre de Usuario</td>
-            <td>Tipo de Usuario</td>
-            <td>Estado de cuenta</td>
-            <td>Accion</td>
-        </tr>
-        <?php
-            $sqlUsers = "SELECT *
-                FROM usuario AS u INNER JOIN tipousuario AS tu
-                    ON u.idtipousuario = tu.idtipousuario
-                                  INNER JOIN estadocuenta as ec
-                    ON ec.idestadocuenta = u.idestadocuenta ORDER BY u.idusuario";
-
-            $fila = mysql_query($sqlUsers);
-            while($r = mysql_fetch_array($fila)){
-        ?>
+    <div class="container fullscreen centered">
+        <h1 class="title has-text-centered">Administración de usuarios</h1>
+        <table class="table is-bordered is-striped is-hoverable">
             <tr>
-                <td>
-                    <?php echo $r["idusuario"] ?>
-                </td>
-                <td>
-                    <?php echo $r["username"] ?>
-                </td>
-                <td>
-                    <?php echo $r["tipousuario"] ?>
-                </td>
-                <td>
-                    <?php echo $r["estadocuenta"] ?>
-                </td>
-                <td>
-                    <?php
-
-                        if ($r["idtipousuario"] == 5) {
-
-                        } else {
-                            if ($r["idestadocuenta"] == 1) {
-                                ?>
-                            <a href="p_administrarusuarios.php?userId=<?php echo $r["idusuario"]?>&action=enable">HABILITAR</a>
-                            <?php
-                            } else {
-                            ?>
-                            <a href="p_administrarusuarios.php?userId=<?php echo $r["idusuario"]?>&action=disable">DESHABILITAR</a>
-                            <?php
-                            }
-                        }
-                            ?>
-                        
-                </td>
+                <td>ID de Usuario</td>
+                <td>Nombre de Usuario</td>
+                <td>Tipo de Usuario</td>
+                <td>Estado de cuenta</td>
+                <td>Accion</td>
             </tr>
-        <?php
-            }
-        ?>
-    </table>
-    <a href="principal.php">Regresar</a>
+            <?php
+                $sqlUsers = "SELECT *
+                    FROM usuario AS u INNER JOIN tipousuario AS tu
+                        ON u.idtipousuario = tu.idtipousuario
+                                      INNER JOIN estadocuenta as ec
+                        ON ec.idestadocuenta = u.idestadocuenta ORDER BY u.idusuario";
+    
+                $fila = mysql_query($sqlUsers);
+                while($r = mysql_fetch_array($fila)){
+            ?>
+                <tr>
+                    <td>
+                        <?php echo $r["idusuario"] ?>
+                    </td>
+                    <td>
+                        <?php echo $r["username"] ?>
+                    </td>
+                    <td>
+                        <?php echo $r["tipousuario"] ?>
+                    </td>
+                    <td>
+                        <?php echo $r["estadocuenta"] ?>
+                    </td>
+                    <td>
+                        <?php
+                            if ($r["idtipousuario"] != 5) {
+                                if ($r["idestadocuenta"] == 1) {
+                                    ?>
+                                <a class="button is-success" href="p_administrarusuarios.php?userId=<?php echo $r["idusuario"]?>&action=enable">HABILITAR</a>
+                                <?php
+                                } else {
+                                ?>
+                                <a class="button is-warning" href="p_administrarusuarios.php?userId=<?php echo $r["idusuario"]?>&action=disable">DESHABILITAR</a>
+                                <?php
+                                }
+                            }
+                        ?>    
+                    </td>
+                </tr>
+            <?php
+                }
+            ?>
+        </table>
+        <a class="button is-link" href="principal.php">Regresar</a>
+    </div>
 </body>
 </html>

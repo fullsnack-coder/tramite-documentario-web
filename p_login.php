@@ -17,15 +17,25 @@
     $existeUsuario = mysql_num_rows($fila);
 
     if ($existeUsuario <= 0) {
-        header("location: /tramite-documentario/index.php");
+        header("location: index.php");
     } else {
         $idusuario = $r["idusuario"];
         $tipousuario = $r["idtipousuario"];
         
         $_SESSION["usuario"] = $idusuario;
         $_SESSION["tipo"] = $tipousuario;
-        //TODO: agregar la variable tipo de usuario
+
         $_SESSION["auth"] = 1;
-        header("location: /tramite-documentario/principal.php");
+        
+        if ($tipousuario == 4) {
+            header("location: principal-personal.php");
+            // echo "personal";
+        } else if ($tipousuario == 5) {
+            header("location: principal-administrador.php");
+            // echo "admin";
+        } else {
+            header("location: principal.php");
+            // echo "normal";
+        }
     }
 ?>

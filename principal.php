@@ -1,13 +1,166 @@
+<?php 
+include("utils/conexion.php");
+include('utils/auth.php');
+$codigo=$_SESSION['usuario'];
+$tipo=$_SESSION['tipo'];
+
+//trabajar con la base de datos
+$sql="select * from tipousuario where idtipousuario=$tipo";
+$f=mysql_query($sql,$cn);
+$r=mysql_fetch_array($f);
+
+$tipo_usuario=$r['tipousuario'];
+$tipo_usuario=strtolower($tipo_usuario);
+
+?>
+
+<?php
+
+    if (isset($_SESSION["auth"]) && $_SESSION["auth"] == "1") {
+        if ($_SESSION["tipo"] == 4) {
+            header("location: principal-personal.php");
+        } else if ($_SESSION["tipo"] == 5) {
+            header("location: principal-administrador.php");
+        }
+    }
+?>
+
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="widdiv=device-widdiv, initial-scale=1">
+	<style type="text/css">
+		#tabla2{
+		display: table;
+		width: 60%;
+		margin: auto;
+		border-spacing: 25px;
+		}
+		.fila2{
+		display: block;
+		margin-bottom: 20px;
+		width: 90%;
+		text-align: center;
+		}
+		.tabla{
+		display: table-cell;
+		width: 30%;
+		margin: 15px;
+		height: 10em;
+		border-style: solid;
+		border-width: 1px;
+		padding: 5em 2em 5em 2em;
+		background-color: #edeaea;
+		vertical-align: middle;
+		}
+		.fila{
+		display: block;
+		margin-bottom: 10px;
+		}
+		.columna{
+		display: block;
+		text-align: center;
+		width: 90%;
+		}
+		.campo{
+			width: 90%;
+			height: 2em;
+			padding-left: 10px;
+			background-color: #d3cdcd;
+		}
+		#consultar{
+			border-radius: 10px;
+			border-width: 0px;
+			width: 95%;
+		}
+		a{
+			color: black;
+			text-decoration-line:none ;
+			font-weight: bold;
+		}
+		.boton{
+			display: table-cell;
+			width: 25%;
+			height: 10px;
+			padding: 15px 20px 15px 20px;
+			background-color: #cbc0c0;
+			vertical-align: middle;
+			border-radius: 6px;
+		}
+	</style>
+	<title>Principal</title>
 </head>
 <body>
-    <h1>PRINCIPAL.PHP</h1>
-    <a href="cerrarsesion.php">Cerrar Sesion</a>
+<br><br>
+<div id="tabla2">
+	<div class="fila2">
+		BIENVENIDO
+	</div>
+		<div class="fila2">
+		QUE DESEAS HACER? 
+	</div>
+		<div class="fila2">
+		<div class="tabla">
+			<form action="p_consulta.php" method="post">
+				<div class="fila">
+					<div class="columna">CONSULTA TU EXPEDIENTE</div>
+				</div>
+			    <div class="fila">
+					<div class="columna">
+						<input type="text" name="codigo" maxlength="11" required placeholder="codigo de expediente" class="campo" autocomplete="off">
+					</div>
+				</div>
+				<div class="fila">
+					<div class="columna">
+						<input type="password" name="password" placeholder="contraseña" required class="campo" autocomplete="off">
+					</div>
+				</div>
+				<div class="fila">
+					<div class="columna">
+						<input type="submit" value="CONSULTAR" class="campo" id="consultar">
+					</div>
+				</div>
+				</form>
+			</div>
+<?php 
+	$sql="select u.*,a.* from usuario u ,$tipo_usuario a where a.idusuario=u.idusuario and u.idusuario=$codigo";
+	$f=mysql_query($sql,$cn);
+	$r=mysql_fetch_array($f);
+	$estado=$r['estado'];
+
+if ($estado==0) {
+?>
+			<div class="tabla">
+					<a href="actualizacion_<?php echo $tipo_usuario;?>.php">
+					NO PUEDE TRAMITAR ACTUALIZE SUS DATOS
+					</a>
+			</div>
+<?php 
+} elseif ($estado==1) {
+?>
+		<div class="tabla">
+					<a href="tramite.php">
+					REGISTRA UN NUEVO TRAMITE
+					</a>
+		</div>
+<?php 	
+}
+?>
+	</div>
+	<div class="fila2">
+		<div class="boton">
+			<a href="perfil.php">
+					MI PERFIL
+			</a>
+		</div>
+		<div class="boton">
+			<a href="cerrarsesion.php">
+					CERRAR SESION
+			</a>
+		</div>
+	</div>
+</div>
+			
 </body>
 </html>

@@ -13,10 +13,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registrate</title>
+    <?php
+        include("cabecera.php");
+    ?>
 </head>
 <body>
-    <?php
-        require("form-register.php");
-    ?>
+    <div class="container centered fullscreen">
+        <?php
+            require("form-register.php");
+        ?>
+    </div>
 </body>
 </html>
