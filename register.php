@@ -18,6 +18,7 @@
     ?>
 </head>
 <body>
+    <div class="message-container"></div>
     <div class="container centered fullscreen">
         <?php
             require("form-register.php");

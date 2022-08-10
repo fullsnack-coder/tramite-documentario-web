@@ -10,6 +10,7 @@
     <title>Inicia Sesion</title>
 </head>
 <body>
+    <div class="message-container"></div>
     <div class="container centered fullscreen">
         <?php
             include("form-login.php");

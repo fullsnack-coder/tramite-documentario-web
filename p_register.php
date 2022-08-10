@@ -1,7 +1,7 @@
 <?php
 
     function regresarARegister($message) {
-        header("location: register.php?hasError=true&m=$message");
+        header("location: register.php?error=true&m=$message");
     }
 
     if (isset($_POST["username"], $_POST["password"], $_POST["repassword"], $_POST["tipousuario"]) == FALSE) {
@@ -13,7 +13,7 @@
         $tipousuario = $_POST["tipousuario"];
         
         if (strlen($usuario) >= 8 && strlen($password) >= 8) {
-            if ($password == $password) {
+            if ($password == $repassword) {
                 include("utils/conexion.php");
 
                 $sqlUser = "INSERT INTO usuario(username, password, idtipousuario, idestadocuenta)
@@ -43,7 +43,7 @@
                 mysql_query($sqlDatos); // crea la entidad segun el tipo de usuario
 
 
-                header("location: principal.php?hasError=false&m=Bienvenido usuario!");
+                header("location: index.php?error=false&m=El usuario se creo correctamente!");
             } else {
                 regresarARegister("Las contraseñas no coinciden");
             }

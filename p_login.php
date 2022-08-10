@@ -17,7 +17,7 @@
     $existeUsuario = mysql_num_rows($fila);
 
     if ($existeUsuario <= 0) {
-        header("location: index.php");
+        header("location: login.php?error=true&m=El usuario no existe o no se encuentra habilitado");
     } else {
         $idusuario = $r["idusuario"];
         $tipousuario = $r["idtipousuario"];
@@ -28,14 +28,14 @@
         $_SESSION["auth"] = 1;
         
         if ($tipousuario == 4) {
-            header("location: principal-personal.php");
-            // echo "personal";
+            header("location: principal-personal.php?error=false&m=Bienvenido");
+            // usuario "personal";
         } else if ($tipousuario == 5) {
-            header("location: principal-administrador.php");
-            // echo "admin";
+            header("location: principal-administrador.php?error=false&m=Bienvenido");
+            // usuario "admin";
         } else {
-            header("location: principal.php");
-            // echo "normal";
+            header("location: principal.php?error=false&m=Bienvenido");
+            // usuario "normal";
         }
     }
 ?>

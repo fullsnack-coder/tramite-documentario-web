@@ -27,6 +27,7 @@
 	?>
 </head>
 <body>
+	<div class="message-container"></div>
 	<div class="container fullscreen centered">
 		<h1 class="title has-text-weight-bold has-text-centered">Actualiza tu información de personal</h1>
 		<form action="p_actualizacion_personal.php" method="post" class="mt-4 update-form">
@@ -87,14 +88,13 @@
 						?>
 					</select>
 				</div>
-				<button class="button is-dark" type="submit">Actualizar</butt>
-			</div>
-			<div class="right">
 				<div class="field">
 					<label for="email" class="label">Email:</label>
 					<input class="input" type="email" name="txtemail" id="email" placeholder="ejemplo@dominio.com"
 						value="<?php echo $rData["email"] ?>" required>
 				</div>
+			</div>
+			<div class="right">
 				<div class="field">
 					<label for="cel" class="label">Celular:</label>
 					<input type="number" name="txtcel" id="cel" class="input" placeholder="Número telefónico"
@@ -115,6 +115,7 @@
 					<input class="input" type="text" name="txtnombres" id="nombres" placeholder="Ingrese sus nombres"
 						value="<?php echo $rData["nombres"] ?>" required>
 				</div>
+				<button class="button is-dark" type="submit">Actualizar</butt>
 			</div>
 		</form>
 		<footer class="has-text-centered p-4">

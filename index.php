@@ -26,6 +26,7 @@
     <title>Bienvenido - Inicia Sesión</title>
 </head>
 <body>
+    <div class="message-container"></div>
     <div class="container centered fullscreen">
         <?php
             require("login.php");

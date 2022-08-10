@@ -1,3 +1,19 @@
+<?php
+
+    include("utils/auth.php");
+    include("utils/conexion.php");
+
+    $codigoUsuario = $_SESSION["usuario"];
+    $sqlTipoUsuario = "SELECT * FROM usuario AS u WHERE u.idusuario = $codigoUsuario";
+    
+    $fTipoUsuario = mysql_query($sqlTipoUsuario, $cn);
+    $rTipoUsuario = mysql_fetch_array($fTipoUsuario);
+
+    if ($rTipoUsuario["idtipousuario"] != 5) {
+        header("principal.php");
+    }
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,6 +26,7 @@
     <title>PANEL DE ADMINISTRADOR</title>
 </head>
 <body>
+    <div class="message-container"></div>
     <section class="container centered fullscreen">
         <header class="has-text-centered mb-5">
             <h1 class="title">Bienvenido administrador</h1>
@@ -17,9 +34,6 @@
         <main class="admin__options mb-6">
             <a class="admin__option is-size-4 has-text-weight has-text-centered m-2" href="rep_alumno.php">
                 Reporte de expedientes de alumnos
-            </a>
-            <a class="admin__option is-size-4 has-text-weight has-text-centered m-2" href="rep_personal.php">
-                Reporte de expedientes de personal
             </a>
             <a class="admin__option is-size-4 has-text-weight has-text-centered m-2" href="rep_egresado.php">
                 Reporte de expedientes de egresado

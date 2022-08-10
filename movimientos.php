@@ -17,6 +17,9 @@ $fila=mysql_query($sql,$cn);
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="widdiv=device-widdiv, initial-scale=1">
+	<?php
+		include("cabecera.php");
+	?>
 	<style type="text/css">
 		#contenedor{
 			width: 60%;
@@ -30,14 +33,17 @@ $fila=mysql_query($sql,$cn);
 		}
 		.boton{
 			display: inline-block;
-			width: 40%;
-			margin: auto;
+			width: 49%;
 			height: 20px;
-			padding: 15px 20px 15px 20px;
-			background-color: #cbc0c0;
+			padding: 15px 20px 35px 20px;
 			vertical-align: middle;
 			text-align: center;
-			border-radius: 6px;
+			margin: auto;
+		}
+		.botones{
+			width: 65%;
+			margin: auto;
+			height: 50px;
 		}
 	</style>
 	<title>Consulta Tramite</title>
@@ -47,19 +53,19 @@ $fila=mysql_query($sql,$cn);
 <br>
 <br><br>
 <div id="contenedor">
-<p align="left"><b>SEGUIMIENTO</b></p>
+<p class="card-header-title" style="padding: 0;padding-bottom: 10px;"><b>SEGUIMIENTO</b></p>
 <p align="left">Visualizando los movimientos del expediente: <?php echo $codigo; ?></p>
 <br>
 <center>
-	<table cellspacing="15" border="0" bgcolor="#e3e2e2" style="width:100%">
-			<tr>
-				<td><b>ID</b></td>
-				<td><b>AREA</b></td>
-				<td><b>TIPO DE DOCUMENTO</b></td>
-				<td><b>REMITENTE</b></td>
-				<td><b>ESTADO</b></td>
-				<td><b>FECHA</b></td>
-			</tr>
+	<table class="table is-hoverable" style="width:100%;">
+		<tr>
+			<th><b>ID</b></th>
+			<th><b>AREA</b></th>
+			<th><b>TIPO DE DOCUMENTO</b></th>
+			<th><b>REMITENTE</b></th>
+			<th><b>ESTADO</b></th>
+			<th><b>FECHA</b></th>
+		</tr>
 <?php 
 while ($r=mysql_fetch_array($fila)) { 
 $idtramite=$r['idtramite'];
@@ -89,13 +95,11 @@ $password=$r['password'];
 </table>
 </center>
 <br>
-		<div class="boton">
-			<a href="principal.php">
+		<div class="botones">
+			<a class="button is-dark boton" href="principal.php">
 					CONSULTAR OTRO EXPEDIENTE
 			</a>
-		</div>
-		<div class="boton">
-			<a href="p_consulta.php?idtramite=<?php echo $idtramite; ?>&password=<?php echo $password; ?>">
+			<a class="button is-dark boton" href="p_consulta.php?idtramite=<?php echo $idtramite; ?>&password=<?php echo $password; ?>">
 					 VOLVER
 			</a>
 		</div>

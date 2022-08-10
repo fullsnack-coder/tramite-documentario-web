@@ -11,7 +11,7 @@
         <input class="input" type="password" name="password" placeholder="Ingresa tu contraseña">
       </div>
     </div>
-    <button class="button is-primary mb-3" type="submit">Iniciar sesión</button>
+    <button class="button is-black mb-3" type="submit">Iniciar sesión</button>
     <div>
         Aún no tienes una cuenta? <a href="register.php">Registrate</a>
     </div>

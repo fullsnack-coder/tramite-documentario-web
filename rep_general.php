@@ -4,18 +4,17 @@
     include("utils/tools.php");
 
     $sql="SELECT (C.fecharegistro)Fecha,
-                (B.dni)Dni,
                 (A.username)Emisor,
                 (C.asunto)Asunto,
                 (D.area)Area,
                 C.idtramite
         FROM usuario A 
-        INNER JOIN alumno  B ON A.idusuario = B.idusuario
         INNER JOIN tramite C ON A.idusuario = C.idusuario
         INNER JOIN area    D ON C.idarea    = D.idarea
         ORDER BY Fecha DESC";
 
     $data=mysql_query($sql, $cn);
+    $contadorRegistro = 0;
 
 ?>
 <!DOCTYPE html>
@@ -29,7 +28,7 @@
     ?>
 </head>
 <body>
-    <div class="container fullscreen centered">
+    <div class="container fullscreen centered p-5">
         <form action="rep_general.php" method="get">
             <?php
                 $valueFechaI = "";
@@ -81,7 +80,6 @@
             <thead align="center">
                 <th>ID</th>
                 <th>Fecha de Emision</th>
-                <th>DNI</th>
                 <th>Emisor</th>
                 <th>Asunto</th>
                 <th>Area asignada</th>
@@ -109,11 +107,11 @@
                     $fechaf = isset($_REQUEST["fechaf"]) ? $_REQUEST["fechaf"] : FALSE;
                     
                     if (validarFiltros($status, $fechai, $fechaf, $idEstado, $r["Fecha"])) {
+                        $contadorRegistro = $contadorRegistro + 1;
                 ?>
                     <tr>
                         <td><?php echo $r["idtramite"] ?></td>
                         <td><?php echo $r['Fecha']?></td>
-                        <td><?php echo $r['Dni']?></td>
                         <td><?php echo $r['Emisor']?></td>
                         <td><?php echo $r['Asunto']?></td>
                         <td><?php echo $r['Area']?></td>
@@ -144,10 +142,22 @@
                 <?php
                     }
                 ?>
-            <?php } ?> 
+            <?php
+                }
+                if ($contadorRegistro == 0) {
+            ?>
+                <tr>
+                    <td colspan="8" class="has-text-centered">
+                        <p class="subtitle">No hay expedientes</p>
+                    </td>
+                </tr>
+            <?php
+                }
+            ?>
             <tbody>
         </table>
         <div class="has-text-centered">
+            <button onclick="exportReportToExcel(this)" class="button is-rounded mr-2">Guardar como XLSX</button>
             <a class="button" href="principal-administrador.php">Volver</a>
         </div>
         <div class="modal">
@@ -208,6 +218,18 @@
                     modalTarget.classList.remove("is-active");
                 })
             })
+        </script>
+        <script src="https://cdn.jsdelivr.net/gh/linways/table-to-excel@v1.0.4/dist/tableToExcel.js"></script>
+        <script text="javascript">
+            function exportReportToExcel() {
+            let table = document.getElementsByTagName("table"); // you can use document.getElementById('tableId') as well by providing id to the table tag
+            TableToExcel.convert(table[0], { // html code may contain multiple tables so here we are refering to 1st table tag
+                name: `rep_general.xlsx`, // fileName you could use any name
+                sheet: {
+                    name: 'Sheet 1' // sheetName
+                }
+            });
+            }
         </script>
     </div>
 </body>

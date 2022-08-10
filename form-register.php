@@ -36,7 +36,7 @@
         </div>
     </div>
     <div>
-        <button class="button is-primary mb-3" type="submit">Registrarme</button>
+        <button class="button is-success mb-3" type="submit">Registrarme</button>
     </div>
     <div>
         Ya tienes una cuenta? <a href="login.php">Inicia sesión</a>

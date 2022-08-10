@@ -7,6 +7,9 @@
         header("location: principal.php");
     }
 
+    $limit = isset($_GET["limit"]) ? $_GET["limit"] : 5;
+    $from = isset($_GET["desde"]) ? $_GET["desde"] : 0;
+
 ?>
 
 <!DOCTYPE html>
@@ -36,9 +39,13 @@
                     FROM usuario AS u INNER JOIN tipousuario AS tu
                         ON u.idtipousuario = tu.idtipousuario
                                       INNER JOIN estadocuenta as ec
-                        ON ec.idestadocuenta = u.idestadocuenta ORDER BY u.idusuario";
+                        ON ec.idestadocuenta = u.idestadocuenta ORDER BY u.idusuario limit $from, $limit";
+
+                $sqlTotalUsuarios = "SELECT * FROM usuario";
     
-                $fila = mysql_query($sqlUsers);
+                $filaTotal = mysql_query($sqlTotalUsuarios, $cn);
+                $fila = mysql_query($sqlUsers, $cn);
+
                 while($r = mysql_fetch_array($fila)){
             ?>
                 <tr>
@@ -74,6 +81,20 @@
                 }
             ?>
         </table>
+        <div class="p-4 is-flex is-justify-content-center">
+            <?php
+                $total = mysql_num_rows($filaTotal);
+                $numPaginas = ceil($total / $limit);
+
+                for($i = 0; $i < $numPaginas; $i++) {
+            ?>
+                <a class="button is-success is-light is-small mr-2" href="administrarusuarios.php?desde=<?php echo $i * $limit ?>&limit=<?php echo $limit?>">
+                    <?php echo ($i + 1) ?>
+                </a>
+            <?php
+                }
+            ?>
+        </div>
         <a class="button is-link" href="principal.php">Regresar</a>
     </div>
 </body>

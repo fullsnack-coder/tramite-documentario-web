@@ -51,8 +51,8 @@
 </head>
 <body>
     <div class="container centered fullscreen">
-        <h2 class="is-size-3 mb-3">Visualizando expedientes dirigidos al area de <?php echo '" '.$r["area"].' "' ?></h2>
-            <table class="table is-striped is-bordered is-hoverable">
+        <h2 class="is-size-3 has-text-centered">Visualizando expedientes dirigidos al area de <?php echo '" '.$r["area"].' "' ?></h2>
+            <table class="table is-striped is-bordered is-hoverable mt-5">
             <thead>
                 <tr>
                     <td>ID</td>
@@ -110,12 +110,12 @@
                         <td><?php echo $estadoTramite["estadotramite"] ?></td>
                         <td>
                                 <a
-                                    class="button is-secondary" 
+                                    class="button is-light m-1 is-small is-success" 
                                     href="p_actualiza_estadotramite.php?idtramite=<?php echo $idtramite?>&action=aprove">
                                     Aprobar
                                 </a>
                                 <a
-                                    class="button is-secondary invalidate-button"
+                                    class="button is-light m-1 is-small is-danger invalidate-button"
                                     data-idtramite="<?php echo $r["idtramite"] ?>"
                                     >
                                     Inhabilitar
@@ -127,16 +127,18 @@
                 ?>
                 <?php
                     }
+                    if ($numRegistrosValidos == 0) {
+                ?>
+                    <tr>
+                        <td colspan="6" class="has-text-centered">
+                            <p class="sutitle">No hay expedientes pendientes</p>
+                        </td>
+                    </tr>
+                <?php
+                    }
                 ?>
             </tbody>
         </table>
-        <?php
-            if ($numRegistrosValidos == 0) {
-        ?>
-            <h2 class="is-size-2">No tiene expedientes pendientes</h2>
-        <?php
-            }
-        ?>
         <footer class="has-text-centered">
             <a class="button is-link is-rounded" href="principal.php">
                 Volver

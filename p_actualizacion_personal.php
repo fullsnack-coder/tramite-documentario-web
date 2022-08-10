@@ -32,9 +32,9 @@
             WHERE idusuario = $codusuario";
 
         mysql_query($sql, $cn);
-        header("location: actualizacion_personal.php");
+        header("location: actualizacion_personal.php?error=false&m=Datos actualizados correctamente");
 
     } else {
-        header("location: actualizacion_personal.php");
+        header("location: actualizacion_personal.php?error=true&m=Ocurrio un error inesperado");
     }
 ?>

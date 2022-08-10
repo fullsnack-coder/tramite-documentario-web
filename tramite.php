@@ -15,7 +15,7 @@ $tipo=$_SESSION['tipo'];
 		width: 40%;
 		margin: auto;
 		padding: 5em 3em 5em 3em;
-		background-color: #c7c7c7;
+		background-color: #f5f5f5;
 		}
 		.fila{
 		display: flex;
@@ -34,7 +34,21 @@ $tipo=$_SESSION['tipo'];
 		.campo{
 			width: 100%;
 		}
+		.boton{
+			display: inline-block;
+			width: 40%;
+			height: 10px;
+			padding: 15px 5px 35px 5px;
+			vertical-align: middle;
+			margin: auto;
+			text-align: center;
+			font-weight: bold;
+			
+		}
 	</style>
+	<?php
+		include("cabecera.php");
+	?>
 	<title>Tramite</title>
 </head>
 <body>
@@ -43,8 +57,8 @@ $tipo=$_SESSION['tipo'];
 		<center>
 			<div class="tabla">
 				<div class="fila">
-					<div class="columnaiz">Tipo de Tramite: </div>
-					<div class="columnader">
+					<div class="columnaiz"><label class="label">Tipo de Tramite:</label> </div>
+					<div class="select is-info columnader">
 						<select name="tipotramite" class="campo">
 						<?php 
 						//trabajar con base de datos
@@ -60,8 +74,8 @@ $tipo=$_SESSION['tipo'];
 					</div>
 				</div>
 				<div class="fila">
-					<div class="columnaiz">Area: </div>
-					<div class="columnader">
+					<div class="columnaiz"><label class="label">Area:</label></div>
+					<div class="select is-info columnader">
 						<select name="area" class="campo">
 						<?php 
 						//trabajar con base de datos
@@ -77,20 +91,33 @@ $tipo=$_SESSION['tipo'];
 					</div>
 				</div>
 				<div class="fila">
-					<div class="columnaiz">Asunto: </div>
+					<div class="columnaiz"><label class="label">Asunto:</label></div>
 					<div class="columnader">
-						<input type="text" name="asunto" class="campo">
+						<input class="input is-info campo" type="text" name="asunto">
 					</div>
 				</div>
 				<div class="fila">
-					<div class="columnaiz">Adjuntar: </div>
-					<div class="columnader">
-						<input type="file" name="archivo" class="campo">
+					<div class="columnaiz"><label class="label">Adjuntar:</label></div>
+					<div class="file has-name columnader">
+						<label class="file-label">
+    					<input class="file-input campo" type="file" name="archivo">
+    					<span class="file-cta">
+      					<span class="file-icon">
+        				<i class="fas fa-upload"></i>
+      					</span>
+      					<span class="file-label" style="width:250px">
+        				Sube tu archivo
+      					</span>
+    					</span>
+  						</label>
 					</div>
 				</div>
 				<br>
 				<center>
-				<input type="submit" value="REGISTRAR TRAMITE" style="background-color: #3814EE;color: white; height: 50px;">
+				<input type="submit" value="REGISTRAR TRAMITE" class="button is-dark boton">
+				<a href="principal.php" class="button is-dark boton">
+					VOLVER
+				</a>
 				</center>	
 			</div>
 		</center>

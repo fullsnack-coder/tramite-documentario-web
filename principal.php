@@ -1,16 +1,16 @@
 <?php 
-include("utils/conexion.php");
-include('utils/auth.php');
-$codigo=$_SESSION['usuario'];
-$tipo=$_SESSION['tipo'];
+	include("utils/conexion.php");
+	include('utils/auth.php');
+	$codigo=$_SESSION['usuario'];
+	$tipo=$_SESSION['tipo'];
 
-//trabajar con la base de datos
-$sql="select * from tipousuario where idtipousuario=$tipo";
-$f=mysql_query($sql,$cn);
-$r=mysql_fetch_array($f);
+	//trabajar con la base de datos
+	$sql="select * from tipousuario where idtipousuario=$tipo";
+	$f=mysql_query($sql,$cn);
+	$r=mysql_fetch_array($f);
 
-$tipo_usuario=$r['tipousuario'];
-$tipo_usuario=strtolower($tipo_usuario);
+	$tipo_usuario=$r['tipousuario'];
+	$tipo_usuario=strtolower($tipo_usuario);
 
 ?>
 
@@ -30,6 +30,9 @@ $tipo_usuario=strtolower($tipo_usuario);
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="widdiv=device-widdiv, initial-scale=1">
+	<?php
+		include("cabecera.php");
+	?>
 	<style type="text/css">
 		#tabla2{
 		display: table;
@@ -72,19 +75,20 @@ $tipo_usuario=strtolower($tipo_usuario);
 		#consultar{
 			border-radius: 10px;
 			border-width: 0px;
-			width: 95%;
+			width: 100%;
 		}
 		a{
 			color: black;
 			text-decoration-line:none ;
 			font-weight: bold;
+			width: 100%;height: 100%;
 		}
 		.boton{
 			display: table-cell;
 			width: 25%;
 			height: 10px;
 			padding: 15px 20px 15px 20px;
-			background-color: #cbc0c0;
+			background-color: #363636;
 			vertical-align: middle;
 			border-radius: 6px;
 		}
@@ -95,30 +99,30 @@ $tipo_usuario=strtolower($tipo_usuario);
 <br><br>
 <div id="tabla2">
 	<div class="fila2">
-		BIENVENIDO
+		<h1 class="title is-1">BIENVENIDO</h1>
 	</div>
 		<div class="fila2">
-		QUE DESEAS HACER? 
+		<h4 class="title is-4">QUE DESEAS HACER?</h4> 
 	</div>
 		<div class="fila2">
 		<div class="tabla">
 			<form action="p_consulta.php" method="post">
 				<div class="fila">
-					<div class="columna">CONSULTA TU EXPEDIENTE</div>
+					<div class="columna"><p class="card-header-title" style="font-size: 20px;">CONSULTA TU EXPEDIENTE</p></div>
 				</div>
 			    <div class="fila">
 					<div class="columna">
-						<input type="text" name="codigo" maxlength="11" required placeholder="codigo de expediente" class="campo" autocomplete="off">
+						<input class="input is-info" type="text" name="codigo" maxlength="11" required placeholder="codigo de expediente" class="campo" autocomplete="off" >
 					</div>
 				</div>
 				<div class="fila">
 					<div class="columna">
-						<input type="password" name="password" placeholder="contraseña" required class="campo" autocomplete="off">
+						<input class="input is-info" type="password" name="password" placeholder="contraseña" required class="campo" autocomplete="off">
 					</div>
 				</div>
 				<div class="fila">
 					<div class="columna">
-						<input type="submit" value="CONSULTAR" class="campo" id="consultar">
+						<input type="submit" value="CONSULTAR" class="button is-dark" class="campo" id="consultar">
 					</div>
 				</div>
 				</form>
@@ -132,35 +136,35 @@ $tipo_usuario=strtolower($tipo_usuario);
 if ($estado==0) {
 ?>
 			<div class="tabla">
-					<a href="actualizacion_<?php echo $tipo_usuario;?>.php">
+				<a href="actualizacion_<?php echo $tipo_usuario;?>.php" class="button is-dark " style="white-space: inherit;">
 					NO PUEDE TRAMITAR ACTUALIZE SUS DATOS
-					</a>
+				</a>
 			</div>
 <?php 
 } elseif ($estado==1) {
 ?>
-		<div class="tabla">
-					<a href="tramite.php">
-					REGISTRA UN NUEVO TRAMITE
-					</a>
+		<div class="tabla" style="background-color:#363636;">
+			<a href="tramite.php" class="button is-dark " style="white-space: inherit;">
+				REGISTRA UN NUEVO TRAMITE
+			</a>
 		</div>
-<?php 	
+<?php
 }
 ?>
 	</div>
 	<div class="fila2">
 		<div class="boton">
-			<a href="perfil.php">
-					MI PERFIL
+			<a href="perfil.php" class="button is-dark">
+				MI PERFIL
 			</a>
 		</div>
 		<div class="boton">
-			<a href="cerrarsesion.php">
-					CERRAR SESION
+			<a href="cerrarsesion.php" class="button is-dark">
+				CERRAR SESION
 			</a>
 		</div>
 	</div>
 </div>
-			
+<div class="message-container"></div>
 </body>
 </html>
